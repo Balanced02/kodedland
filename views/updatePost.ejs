@@ -6,22 +6,22 @@
     <div class="row">
       <div class="col-md-9 col-sm-9 col-xs-12">
         <h3>UPDATE POST</h3>
-        <form action="/addpost" method="POST">
+        <form action="/updatepost/<%= post._id %>" method="POST" id = '<%= post._id %>' >
            <div class="form-group">
-             <input type="text" class="form-control" placeholder="Post Title" name="title" required>
+             <input type="text" class="form-control" placeholder="Post Title" name="title" value='<%= post.title %>' required >
            </div>
            <div class="form-group">
             <label for="exampleTextarea">Post Content</label>
-            <textarea class="form-control" name="content" id="exampleTextarea" rows="5"></textarea>
+            <textarea class="form-control" name="content" id="exampleTextarea" rows="5"><%= post.content%> </textarea>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" name="tags" placeholder="#Tags">
+            <input type="text" class="form-control" name="tags" placeholder="#Tags" value='<%= post.tags %>'>
           </div>
           <div class="form-group">
-            <input class="form-control" type="text" placeholder="Image Link (https://imgur.com/)" name="imagelink" >
+            <input class="form-control" type="text" placeholder="Image Link (https://imgur.com/)" name="imagelink" value='<%= post.imagelink %>'>
           </div>
           <div class="form-group">
-            <button class="btn btn-success btn-block" type="submit">SUBMIT POST</button>
+            <button class="btn btn-success btn-block" type="submit">UPDATE POST</button>
           </div>
 
         </form>

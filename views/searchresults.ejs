@@ -4,7 +4,8 @@
 
     <div class="row">
       <div class="col-md-9 col-sm-9 col-xs-12">
-        <% posts.map(d => { %>
+        <h3> Search result<%= posts.length === 1 ? '' : 's' %></h3>
+        <% if (posts.length !=0) { posts.map(d => { %>
           <div class="post" id = '<%= d._id %>'>
             <div class="row">
               <div class="col-md-2 col-xs-3 col-sm-2">
@@ -16,14 +17,17 @@
                   <div class="datePosted">
                     <span><%= moment(d.created).format('MMM Do YYYY') %></span> <br/>
                     <span><a><%= d.comments.length %> comments</a></span>
-                    <form action='/deletepost/<%= d._id %>' method="POST"><button type="submit" class = "btn btn-danger">Delete this post</button></form>
+                    <form action='/deletepost' method="POST"><button type="submit" class = "btn btn-danger">Delete this post</button></form>
                     <span><a href='/updatepost/<%= d._id %>'>Update this post</a></span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <% }) %>
+          <% }) } 
+          else { %>
+            <h5> No results found </h5>
+            <% } %>
       </div>
       <div class="col-md-3 col-sm-3 col-xs-12">
         <div class="row">
@@ -38,7 +42,7 @@
 
 
             
-          <form action="#" class="loginform form-control">
+<form action="" class="loginform">
             <div class="form-group">
               <input type="text" placeholder="Username" required class="form-control">
             </div>
@@ -54,7 +58,7 @@
               <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
             </div>
             <div class="form-group">
-              <a type='button' href="#" class="btn btn-warning btn-block">SIGN UP</a>
+              <button type="submit" class="btn btn-warning btn-block">SIGN UP</button>
             </div>
           </form>
           <% } %>

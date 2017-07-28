@@ -1,4 +1,5 @@
 const express = require("express");
+const fileUpload = require('express-fileupload')
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -20,11 +21,6 @@ let db = mongoose
     console.log(err);
   });
 
-//Viewing engines
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
-
 //Express Middleware
 app.use(express.static(path.join(__dirname, "assets")));
 app.use(
@@ -32,8 +28,13 @@ app.use(
     extended: false
   })
 );
-
 app.use(bodyParser.json());
+app.use(fileUpload())
+
+//Viewing engines
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 
 app.use("/", routes);
 
