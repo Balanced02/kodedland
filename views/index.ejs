@@ -1,0 +1,64 @@
+<% include partials/head %>
+
+  <div class="main container-fluid">
+
+    <div class="row">
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        <% posts.map(d => { %>
+          <div class="post">
+            <div class="row">
+              <div class="col-md-2 col-xs-3 col-sm-2">
+                <img class="img-fluid" src="<%= d.imagelink%>" alt="itemlogo">
+              </div>
+              <div class="col-md-10 col-xs-9 col-sm-10">
+                <div class="text">
+                  <strong><a href="http://thehashhub.com"><%= d.title %></a></strong>
+                  <div class="datePosted">
+                    <span><%= moment(d.created).format('MMM Do YYYY') %></span> <br/>
+                    <span><a><%= d.comments.length %> comments</a></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+        <div class="row">
+          <% if (isLoggedIn) { %>
+            <div class="isLoggedIn text-center">
+              <i class="fa fa-user fa-5x"></i>
+              <p>Name: <%= user.name %> </p>
+              <p>Registered: <%= user.registered %> </p>
+              
+            </div>
+          <% } else { %>
+
+
+            
+          <form action="" class="loginform">
+            <div class="form-group">
+              <input type="text" placeholder="Username" required class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" required class="form-control">
+            </div>
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input"> Remember Me
+              </label>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+            </div>
+          </form>
+          <% } %>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+ 
+  <% include partials/foot %>

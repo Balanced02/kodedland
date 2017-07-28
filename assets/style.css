@@ -1,0 +1,18 @@
+ .main {
+  margin: 10px 5px 0px 5px
+} 
+
+.post {
+  border: 1px solid skyblue;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.loginform {
+  margin: 5px;
+}
+
+.isLoggedIn {
+  margin: 5px;
+  border: 1px solid skyblue;
+}

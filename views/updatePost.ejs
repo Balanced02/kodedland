@@ -1,0 +1,38 @@
+<% include partials/head %>
+
+
+  <div class="main container-fluid">
+
+    <div class="row">
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        <h3>UPDATE POST</h3>
+        <form action="/addpost" method="POST">
+           <div class="form-group">
+             <input type="text" class="form-control" placeholder="Post Title" name="title" required>
+           </div>
+           <div class="form-group">
+            <label for="exampleTextarea">Post Content</label>
+            <textarea class="form-control" name="content" id="exampleTextarea" rows="5"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" name="tags" placeholder="#Tags">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Image Link (https://imgur.com/)" name="imagelink" >
+          </div>
+          <div class="form-group">
+            <button class="btn btn-success btn-block" type="submit">SUBMIT POST</button>
+          </div>
+
+        </form>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <% include partials/foot %>
