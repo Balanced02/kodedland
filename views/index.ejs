@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-md-9 col-sm-9 col-xs-12">
         <% posts.map(d => { %>
-          <div class="post" id = '<%= d._id %>'>
+          <div class="post" id='<%= d._id %>'>
             <div class="row">
               <div class="col-md-2 col-xs-3 col-sm-2">
                 <img class="img-fluid" src="<%= d.imagelink%>" alt="itemlogo">
@@ -16,9 +16,10 @@
                   <div class="datePosted">
                     <span><%= moment(d.created).format('MMM Do YYYY') %></span> <br/>
                     <span><a><%= d.comments.length %> comments</a></span>
-                    <form action='/deletepost/<%= d._id %>' method="POST"><button type="submit" class = "btn btn-danger">Delete this post</button></form>
-                    <span><a href='/updatepost/<%= d._id %>'>Update this post</a></span>
                   </div>
+                  <form action='/deletepost/<%= d._id %>' method="POST" class="form-inline"><button type="submit" class="btn btn-danger">Delete this post</button>
+                    <span><a href='/updatepost/<%= d._id %>'>Update this post</a></span>
+                  </form>
                 </div>
               </div>
             </div>
@@ -30,34 +31,40 @@
           <% if (isLoggedIn) { %>
             <div class="isLoggedIn text-center">
               <i class="fa fa-user fa-5x"></i>
-              <p>Name: <%= user.name %> </p>
-              <p>Registered: <%= user.registered %> </p>
-              
+              <p>Name:
+                <%= user.name %>
+              </p>
+              <p>Registered:
+                <%= user.registered %>
+              </p>
+
             </div>
-          <% } else { %>
+            <% } else { %>
 
 
-            
-          <form action="#" class="loginform form-control">
-            <div class="form-group">
-              <input type="text" placeholder="Username" required class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" required class="form-control">
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input"> Remember Me
-              </label>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
-            </div>
-            <div class="form-group">
-              <a type='button' href="#" class="btn btn-warning btn-block">SIGN UP</a>
-            </div>
-          </form>
-          <% } %>
+
+              <form action="#" class="loginform form-control">
+                <div class="input-group">
+                  <div class="input-group-addon">@</div>
+                  <input type="text" placeholder="Username" required class="form-control">
+                </div>
+                <div class="input-group">
+                  <div class="input-group-addon"><span class="fa fa-eye-slash"></span></div>
+                  <input type="password" placeholder="Password" required class="form-control">
+                </div>
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" class="custom-control-input">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Remember me</span>
+            </label>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block">LOGIN</button>
+                </div>
+                <div class="form-group">
+                  <a type='button' href="#" class="btn btn-warning btn-block">SIGN UP</a>
+                </div>
+              </form>
+              <% } %>
         </div>
       </div>
 
@@ -65,5 +72,5 @@
     </div>
 
   </div>
- 
+
   <% include partials/foot %>

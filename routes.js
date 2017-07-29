@@ -87,7 +87,8 @@ router.post("/searchresults", (req, res) => {
         pagetitle: "Search Results",
         posts: data,
         isLoggedIn: false,
-        user: users[Math.floor(Math.random() * users.length)]
+        user: users[Math.floor(Math.random() * users.length)],
+        search,
       });
     })
     .catch(err => {
