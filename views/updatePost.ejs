@@ -31,22 +31,25 @@
           <% if (isLoggedIn) { %>
             <div class="isLoggedIn text-center">
               <i class="fa fa-user fa-5x"></i>
-              <p>Name: <%= user.name %> </p>
-              <p>Registered: <%= user.registered %> </p>
-              
-            </div>
-          <% } else { %>
+              <p>Name:
+                <%= user.username %>
+              </p>
+              <p>Registered:
+                <%= moment(user.registered).format('MMM Do YYYY') %>
+              </p>
 
+            </div>
+            <% } else { %>
 
             
               <form action="#" class="loginform form-control">
                 <div class="input-group">
                   <div class="input-group-addon">@</div>
-                  <input type="text" placeholder="Username" required class="form-control">
+                  <input type="text" placeholder="Username" required class="form-control" name="username">
                 </div>
                 <div class="input-group">
                   <div class="input-group-addon"><span class="fa fa-eye-slash"></span></div>
-                  <input type="password" placeholder="Password" required class="form-control">
+                  <input type="password" placeholder="Password" required class="form-control" name="password">
                 </div>
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
               <input type="checkbox" class="custom-control-input">
