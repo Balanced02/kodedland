@@ -6,9 +6,9 @@
         <p>Please fill the form below...Thanks!!!</p>
         <form action="/signup" method="POST" class="form-group">
           <div class="form-inline form-group">
-            <input type="text" placeholder="Firstname" required class="form-control" name="firstName" value= '<%= obj.firstName%>' >
+            <input type="text" placeholder="Firstname" required class="form-control" name="firstName" value= '<%= obj.firstName %>' >
             <hr>
-            <input type="text" placeholder="Lastname" required class="form-control" name="lastName" value= '<%= obj.lastName%>'>
+            <input type="text" placeholder="Lastname" required class="form-control" name="lastName" value= '<%= obj.lastName %>'>
           </div>
           <div class="form-group <% if ((obj.error == 'full') || (obj.error == 'username')) { %> has-danger <% } %>">
           <div class="input-group form-group">
@@ -22,7 +22,7 @@
           <div class="form-group <% if ((obj.error == 'full') || (obj.error == 'password')) { %> has-danger <% } %>" >
             <div class="input-group form-group">
             <div class="input-group-addon"><span class='fa fa-lock'></span></div>
-            <input type="password" placeholder="Password" required class="form-control <% if (obj.error == 'full' || obj.error == 'password') { %> form-control-danger <% } %>" name="password" minlength="8">
+            <input type="password" placeholder="Password" required class="form-control <% if (obj.error == 'full' || obj.error == 'password') { %> form-control-danger <% } %>" name="password" minlength="8" >
           </div>
           <% if (obj.error == 'full' || obj.error == 'password') { %>
           <div class="form-control-feedback">The passwords you entered do not match, please re-enter your password</div>
@@ -33,7 +33,7 @@
             <input type="password" placeholder="Confirm Password" required class="form-control" name="password2" minlength="8">
           </div>
           <div class="form-group <% if ((obj.error == 'full') || (obj.error == 'email')) { %> has-danger <% } %>">
-            <input type="email" placeholder="Email address" required class="form-control" name="email" value= '<%= obj.email%>'>
+          <input type="email" placeholder="Email address" required class="form-control" name="email" value= '<%= obj.email%>' oninvalid="this.setCustomValidity('Please Enter valid email')" oninput="setCustomValidity('')">
           </div>
           <div class="form-group">
             <input type="number" placeholder="Phone Number" required class="form-control" minlength="11" maxlength="11" name="phoneNumber" value= '<%= obj.phoneNumber%>'>

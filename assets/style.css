@@ -17,3 +17,17 @@
   margin: 5px;
   border: 1px solid skyblue;
 }
+
+.unsaved {
+  color: whitesmoke;
+  background: gold;
+  border-radius: 50%;
+  border: 2px solid gold;
+}
+
+.saved {
+  color: gold;
+  background: whitesmoke;
+  border-radius: 50%;
+  border: 2px solid whitesmoke; 
+}

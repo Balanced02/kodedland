@@ -17,6 +17,7 @@ let postSchema = new Schema({
   ],
   votes: { type: Number, default: 0 },
   imagelink: String,
+  saved: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model('Post', postSchema);

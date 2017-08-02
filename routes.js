@@ -2,16 +2,19 @@ const express = require("express");
 const Post = require("./models/PostSchema");
 const moment = require("moment");
 const Profile = require("./models/profileSchema");
-
+const _ = require('lodash')
 const router = express.Router();
+
 let isLoggedIn = false;
+
 router.use((req, res, next) => {
   res.locals.title = "KodedLand";
   res.locals.moment = moment;
   next();
 });
 
-let user = {}
+let user = {};
+
 router.get("/", (req, res) => {
   Post.find()
     .then(data => {
@@ -57,8 +60,10 @@ router.post("/addpost", (req, res) => {
     author,
     imagelink
   })
-    .then(() => {
+    .then((newUser) => {
       console.log("Post created successfully");
+      isLoggedIn = true;
+      user = newUser;
       return res.redirect("/");
     })
     .catch(err => {
@@ -96,7 +101,7 @@ router.post("/searchresults", (req, res) => {
         pagetitle: "Search Results",
         posts: data,
         isLoggedIn,
-        user: users[Math.floor(Math.random() * users.length)],
+        user,
         search
       });
     })
@@ -114,7 +119,7 @@ router.get("/updatepost/:id", (req, res) => {
       pagetitle: "Update Post",
       post: data,
       isLoggedIn,
-      user: users[Math.floor(Math.random() * users.length)]
+      user
     });
   });
 });
@@ -145,9 +150,9 @@ router.post("/updatepost/:id", (req, res) => {
     },
     err => {
       console.log(err);
+  return res.redirect("/");
     }
   );
-  return res.redirect("/");
 });
 
 router.post("/signup", (req, res) => {
@@ -168,6 +173,7 @@ router.post("/signup", (req, res) => {
     phoneNumber,
     error
   };
+
   let search = "";
   let usernamequery = Profile.where({
     username: new RegExp(username, "i")
@@ -187,10 +193,9 @@ router.post("/signup", (req, res) => {
           if (password !== password2 && search == username) {
             obj.error = "full";
           }
-          console.log(obj.error);
           return res.render("signup", {
             pagetitle: "Update Post",
-            obj: obj
+            obj
           });
         }
       } else {
@@ -204,6 +209,17 @@ router.post("/signup", (req, res) => {
     });
 });
 
+// router.post("/signup", (req, res) => {
+//   var body = _.pick(req.body, ['email', 'password', 'firstName', 'lastName', 'username'])
+//   console.log(body)
+//   let user = new user(body)
+//   user.save().then((user) => {
+//     res.send(user)
+//   }).catch((e) => {
+//     res.status(400).send(e)
+//   })
+// })
+
 router.post("/login", (req, res) => {
   let username = req.body.username.trim().toLowerCase();
   let password = req.body.password;
@@ -211,6 +227,7 @@ router.post("/login", (req, res) => {
   usernamequery
     .findOne()
     .then(data => {
+      if (!data) {return res.redirect('/')}
       if (data.password == password) {
         isLoggedIn = true;
         user = data;
@@ -224,4 +241,62 @@ router.post("/login", (req, res) => {
     });
 });
 
-module.exports = router;
+// passport.use(
+//   new LocalStrategy(function(username, password, done) {
+//     Profile.findOne({ username: username }, (err, user) => {
+//       if (err) {
+//         return done(err);
+//       }
+//       if (!user) {
+//         return done(null, false, { message: "Incorrect username." });
+//       }
+//       if (!user.validPassword(password)) {
+//         return done(null, false, { message: "Incorrect password." });
+//       }
+//       return done(null, user);
+//     });
+//   })
+// );
+
+// router.post(
+//   "/login",
+//   passport.authenticate("local", {
+//     successRedirect: "/",
+//     failureRedirect: "/login",
+//     failureFlash: true
+//   })
+// );
+
+router.get("/savedposts", (req, res) => {
+  let myquery = Post.where({
+    search: true
+  });
+  myquery
+    .find()
+    .then(data => {
+      console.log(`Displaying saved posts`);
+      return res.render("savedPost", {
+        pagetitle: "Saved Post",
+        posts: data,
+        isLoggedIn,
+        user,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+router.get('/save/:id', (req, res) => {
+  let id = req.params.id;
+  let myquery = Post.where({_id: id})
+  myquery.findOne().then((data) => {
+    data.saved = !data.saved;
+    console.log(data)
+    return res.redirect('/')
+  }).catch((err) => {
+    console.log(err)
+  })
+})
+
+module.exports = router; 

@@ -3,10 +3,12 @@ const fileUpload = require('express-fileupload')
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+// const passport = require('passport')
+// const LocalStrategy = require('passport-local').Strategy;
 
 const routes = require("./routes"); //because routes is a file
 
-const PORT = 4000;
+const PORT = 3000;
 
 const app = express();
 
@@ -30,6 +32,8 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(fileUpload())
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 //Viewing engines
 app.set("views", path.join(__dirname, "views"));
